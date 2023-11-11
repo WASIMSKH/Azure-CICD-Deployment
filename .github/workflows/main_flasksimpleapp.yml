@@ -17,20 +17,20 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2
 
     - name: Log in to registry
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
         registry: https://flasksimpleapp.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_5b09cac32d304eee8c54bc24d96dcc33 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_3d73f5fc797c4407af32f10dc4f55f7f }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_0474aa74ea9f464dbd2c2590f03c7f76 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_fa414aed36a3445298b92c376cf4e9d3 }}
 
     - name: Build and push container image to registry
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         push: true
-        tags: flasksimpleapp.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5b09cac32d304eee8c54bc24d96dcc33 }}/flaskapp:${{ github.sha }}
+        tags: flasksimpleapp.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_0474aa74ea9f464dbd2c2590f03c7f76 }}/flaskapp:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'flasksimpleapp'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_21bd9f57fdc6487bb09f32d142ee952f }}
-        images: 'flasksimpleapp.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5b09cac32d304eee8c54bc24d96dcc33 }}/flaskapp:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f2c1f089c39d4f3088d234737466a13b }}
+        images: 'flasksimpleapp.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_0474aa74ea9f464dbd2c2590f03c7f76 }}/flaskapp:${{ github.sha }}'
